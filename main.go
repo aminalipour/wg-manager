@@ -16,10 +16,10 @@ import (
 	"github.com/DMarby/jitter"
 	"github.com/infosum/statsd"
 	"github.com/jamiealquiza/envy"
-	"github.com/mullvad/wg-manager/api"
-	"github.com/mullvad/wg-manager/api/subscriber"
-	"github.com/mullvad/wg-manager/portforward"
-	"github.com/mullvad/wg-manager/wireguard"
+	"bitbucket.org/siolio/wg-manager/api"
+	"bitbucket.org/siolio/wg-manager/api/subscriber"
+	"bitbucket.org/siolio/wg-manager/portforward"
+	"bitbucket.org/siolio/wg-manager/wireguard"
 )
 
 var (

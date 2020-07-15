@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/infosum/statsd"
-	"github.com/mullvad/wg-manager/api"
+	"bitbucket.org/siolio/wg-manager/api"
 	"nhooyr.io/websocket"
 	"nhooyr.io/websocket/wsjson"
 )

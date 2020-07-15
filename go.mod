@@ -1,4 +1,4 @@
-module github.com/mullvad/wg-manager
+module bitbucket.org/siolio/wg-manager
 
 go 1.13
 
