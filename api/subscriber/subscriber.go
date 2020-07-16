@@ -2,12 +2,13 @@ package subscriber
 
 import (
 	"context"
+	"encoding/base64"
 	"log"
 	"net/http"
 	"time"
 
-	"bitbucket.org/siolio/wg-manager/api"
 	"github.com/infosum/statsd"
+	"bitbucket.org/siolio/wg-manager/api"
 	"nhooyr.io/websocket"
 	"nhooyr.io/websocket/wsjson"
 )
@@ -43,9 +44,10 @@ func (s *Subscriber) Subscribe(ctx context.Context, channel chan<- WireguardEven
 func (s *Subscriber) connect(ctx context.Context, channel chan<- WireguardEvent) error {
 	header := http.Header{}
 
-
+	if s.Username != "" && s.Password != "" {
+		header.Set("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(s.Username+":"+s.Password)))
+	}
 	header.Set("Access-Control-Allow-Origin","*")
-
 	conn, _, err := websocket.Dial(ctx, s.BaseURL+"/channel/"+s.Channel, &websocket.DialOptions{
 		Subprotocols: []string{subProtocol},
 		HTTPHeader:   header,
