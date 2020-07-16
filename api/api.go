@@ -62,10 +62,10 @@ func (a *API) GetWireguardPeers() (WireguardPeerList, error) {
 }
 
 // GetWireguardPeers fetches a list of wireguard peers from the API and returns it
-func (a *API) UpdateServerData(connectedPeers int, CPUUsage int, receive uint64,transfer uint64) {
+func (a *API) UpdateServerData(connectedPeers int, CPUUsage float64, receive uint64,transfer uint64) {
 	values := map[string]string{
 		"connected_peers": strconv.Itoa(connectedPeers),
-		"cpu_usage": strconv.Itoa(CPUUsage),
+		"cpu_usage": strconv.FormatFloat(CPUUsage,'f', 6, 64),
 		"receive": strconv.FormatUint(receive,10),
 		"transfer": strconv.FormatUint(transfer,10),
 	}
