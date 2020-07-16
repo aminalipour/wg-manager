@@ -79,7 +79,10 @@ func (a *API) UpdateServerData(connectedPeers int, CPUUsage float64, receive uin
 		req.SetBasicAuth(a.Username, a.Password)
 	}
 
-	response, _ := a.Client.Do(req)
+	response, err := a.Client.Do(req)
+	if err!=nil {
+		panic(err.Error())
+	}
 
 	defer response.Body.Close()
 }
