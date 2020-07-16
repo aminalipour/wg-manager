@@ -47,6 +47,7 @@ func (s *Subscriber) connect(ctx context.Context, channel chan<- WireguardEvent)
 	if s.Username != "" && s.Password != "" {
 		header.Set("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(s.Username+":"+s.Password)))
 	}
+	header.Set("Access-Control-Allow-Origin","*")
 
 	conn, _, err := websocket.Dial(ctx, s.BaseURL+"/channel/"+s.Channel, &websocket.DialOptions{
 		Subprotocols: []string{subProtocol},
