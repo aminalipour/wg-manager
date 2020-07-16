@@ -37,7 +37,7 @@ func main() {
 	delay := flag.Duration("delay", time.Second*45, "max random delay for the synchronization")
 	apiTimeout := flag.Duration("api-timeout", time.Second*30, "max duration for API requests")
 	url := flag.String("url", "https://api.connectvpn.net/v1", "api url")
-	adminUrl := flag.String("url", "https://connectvpn.net/api", "admin api url")
+	adminUrl := flag.String("adminUrl", "https://connectvpn.net/api", "admin api url")
 	username := flag.String("username", "test", "api username")
 	password := flag.String("password", "test", "api password")
 	interfaces := flag.String("interfaces", "wg0", "wireguard interfaces to configure. Pass a comma delimited list to configure multiple interfaces, eg 'wg0,wg1,wg2'")
