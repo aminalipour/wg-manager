@@ -2,13 +2,12 @@ package subscriber
 
 import (
 	"context"
-	"encoding/base64"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/infosum/statsd"
 	"bitbucket.org/siolio/wg-manager/api"
+	"github.com/infosum/statsd"
 	"nhooyr.io/websocket"
 	"nhooyr.io/websocket/wsjson"
 )
