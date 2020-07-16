@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bitbucket.org/siolio/wg-manager/util"
 	"context"
 	"errors"
 	"flag"
@@ -36,6 +37,7 @@ func main() {
 	delay := flag.Duration("delay", time.Second*45, "max random delay for the synchronization")
 	apiTimeout := flag.Duration("api-timeout", time.Second*30, "max duration for API requests")
 	url := flag.String("url", "https://example.com", "api url")
+	adminUrl := flag.String("url", "https://example.com", "admin api url")
 	username := flag.String("username", "", "api username")
 	password := flag.String("password", "", "api password")
 	interfaces := flag.String("interfaces", "wg0", "wireguard interfaces to configure. Pass a comma delimited list to configure multiple interfaces, eg 'wg0,wg1,wg2'")
@@ -77,6 +79,7 @@ func main() {
 		Username: *username,
 		Password: *password,
 		BaseURL:  *url,
+		AdminBaseURL:  *adminUrl,
 		Client: &http.Client{
 			Timeout: *apiTimeout,
 		},
@@ -172,7 +175,10 @@ func synchronize() {
 	t.Send("get_wireguard_peers_time")
 
 	t = metrics.NewTiming()
-	wg.UpdatePeers(peers)
+	connectedPeers := wg.UpdatePeers(peers)
+	CPUUsage := util.GetCPUUsage()
+	receive,transfer := util.GetNetworkLoad()
+	a.UpdateServerData(connectedPeers,CPUUsage,receive,transfer)
 	t.Send("update_peers_time")
 
 	t = metrics.NewTiming()

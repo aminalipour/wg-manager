@@ -43,7 +43,7 @@ func New(interfaces []string, metrics *statsd.Client) (*Wireguard, error) {
 }
 
 // UpdatePeers updates the configuration of the wireguard interfaces to match the given list of peers
-func (w *Wireguard) UpdatePeers(peers api.WireguardPeerList) {
+func (w *Wireguard) UpdatePeers(peers api.WireguardPeerList) int {
 	peerMap := w.mapPeers(peers)
 
 	var connectedPeers int
@@ -142,7 +142,9 @@ func (w *Wireguard) UpdatePeers(peers api.WireguardPeerList) {
 	}
 
 	// Send metrics
+
 	w.metrics.Gauge("connected_peers", connectedPeers)
+	return connectedPeers
 }
 
 // Take the wireguard peers and convert them into a map for easier comparison
