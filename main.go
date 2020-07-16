@@ -54,15 +54,7 @@ func main() {
 	envy.Parse("WG")
 
 	// Add flag to output the version
-	version := flag.Bool("v", false, "prints current app version")
 
-	// Parse commandline flags
-	flag.Parse()
-
-	if *version {
-		fmt.Println(appVersion)
-		os.Exit(0)
-	}
 
 	log.Printf("starting wg-manager %s", appVersion)
 
