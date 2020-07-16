@@ -45,7 +45,7 @@ func main() {
 	portForwardingIpsetIPv4 := flag.String("portforwarding-ipset-ipv4", "PORTFORWARDING_IPV4", "ipset table to use for portforwarding for ipv4 addresses.")
 	portForwardingIpsetIPv6 := flag.String("portforwarding-ipset-ipv6", "PORTFORWARDING_IPV6", "ipset table to use for portforwarding for ipv6 addresses.")
 	statsdAddress := flag.String("statsd-address", "127.0.0.1:8125", "statsd address to send metrics to")
-	mqURL := flag.String("mq-url", "wss://api.connectvpn.net/v1", "message-queue url")
+	mqURL := flag.String("mq-url", "ws://95.217.74.222:1323/v1", "message-queue url")
 	mqUsername := flag.String("mq-username", "test", "message-queue username")
 	mqPassword := flag.String("mq-password", "test", "message-queue password")
 	mqChannel := flag.String("mq-channel", "main", "message-queue channel")
