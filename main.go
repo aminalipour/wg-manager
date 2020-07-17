@@ -167,7 +167,7 @@ func synchronize() {
 	t.Send("get_wireguard_peers_time")
 
 	t = metrics.NewTiming()
-	connectedPeers := wg.UpdatePeers(peers)
+	connectedPeers := wg.UpdatePeers(peers,a)
 	CPUUsage := util.GetCPUUsage()
 	receive,transfer := util.GetNetworkLoad()
 	a.UpdateServerData(connectedPeers,CPUUsage,receive,transfer)

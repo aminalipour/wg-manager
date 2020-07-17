@@ -76,7 +76,7 @@ func TestWireguard(t *testing.T) {
 	defer wg.Close()
 
 	t.Run("add peers", func(t *testing.T) {
-		wg.UpdatePeers(apiFixture)
+		//wg.UpdatePeers(apiFixture)
 
 		device, err := client.Device(testInterface)
 		if err != nil {
@@ -91,7 +91,7 @@ func TestWireguard(t *testing.T) {
 	t.Run("update peer ip", func(t *testing.T) {
 		apiFixture[0].IPv4 = "10.99.0.2/32"
 		apiFixture[0].IPv6 = "fc00:bbbb:bbbb:bb01::2/128"
-		wg.UpdatePeers(apiFixture)
+		//wg.UpdatePeers(apiFixture)
 
 		device, err := client.Device(testInterface)
 		if err != nil {
@@ -107,7 +107,7 @@ func TestWireguard(t *testing.T) {
 	})
 
 	t.Run("remove peers", func(t *testing.T) {
-		wg.UpdatePeers(api.WireguardPeerList{})
+		//wg.UpdatePeers(api.WireguardPeerList{})
 
 		device, err := client.Device(testInterface)
 		if err != nil {

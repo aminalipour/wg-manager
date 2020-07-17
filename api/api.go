@@ -1,7 +1,6 @@
 package api
 
 import (
-	"bitbucket.org/siolio/wg-manager/wireguard"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -29,6 +28,12 @@ type WireguardPeer struct {
 	Ports  []int  `json:"ports"`
 	Pubkey string `json:"pubkey"`
 }
+type PeerUsages struct{
+	Receive int64 `json:"receive"`
+	Transmit int64 `json:"transmit"`
+}
+
+type PeerUsagesData map[string][]PeerUsages
 
 // GetWireguardPeers fetches a list of wireguard peers from the API and returns it
 func (a *API) GetWireguardPeers() (WireguardPeerList, error) {
@@ -89,8 +94,8 @@ func (a *API) UpdateServerData(connectedPeers int, CPUUsage float64, receive uin
 }
 
 
-func (a *API) UpdatePeersBandwidthUsages(peersUsages wireguard.PeerUsagesData) {
-	values := map[string]wireguard.PeerUsagesData{
+func (a *API) UpdatePeersBandwidthUsages(peersUsages PeerUsagesData) {
+	values := map[string]PeerUsagesData{
 		"peers": peersUsages,
 	}
 

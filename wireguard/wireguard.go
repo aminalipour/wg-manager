@@ -6,8 +6,8 @@ import (
 	"net"
 	"time"
 
-	"github.com/infosum/statsd"
 	"bitbucket.org/siolio/wg-manager/api"
+	"github.com/infosum/statsd"
 
 	"bitbucket.org/siolio/wg-manager/iputil"
 	"golang.zx2c4.com/wireguard/wgctrl"
@@ -20,12 +20,7 @@ type Wireguard struct {
 	interfaces []string
 	metrics    *statsd.Client
 }
-type PeerUsages struct{
-	Receive int64 `json:"receive"`
-	Transmit int64 `json:"transmit"`
-}
 
-type PeerUsagesData map[string][]PeerUsages
 
 // New ensures that the interfaces given are valid, and returns a new Wireguard instance
 func New(interfaces []string, metrics *statsd.Client) (*Wireguard, error) {
@@ -191,10 +186,10 @@ const handshakeInterval = time.Minute * 2
 // Count the connected wireguard peers
 func countConnectedPeers(peers []wgtypes.Peer, a *api.API) (connectedPeers int) {
 
-	tmp := make(PeerUsagesData)
+	tmp := make(api.PeerUsagesData)
 
 	for _, peer := range peers {
-		tmp[peer.PublicKey.String()] = append(tmp[peer.PublicKey.String()],PeerUsages{Receive: peer.ReceiveBytes,Transmit: peer.TransmitBytes})
+		tmp[peer.PublicKey.String()] = append(tmp[peer.PublicKey.String()],api.PeerUsages{Receive: peer.ReceiveBytes,Transmit: peer.TransmitBytes})
 		if time.Since(peer.LastHandshakeTime) <= handshakeInterval {
 			connectedPeers++
 		}
