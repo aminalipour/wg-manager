@@ -20,6 +20,12 @@ type Wireguard struct {
 	interfaces []string
 	metrics    *statsd.Client
 }
+type PeerUsages struct{
+	Receive int64 `json:"receive"`
+	Transmit int64 `json:"transmit"`
+}
+
+type PeerUsagesData map[string][]PeerUsages
 
 // New ensures that the interfaces given are valid, and returns a new Wireguard instance
 func New(interfaces []string, metrics *statsd.Client) (*Wireguard, error) {
@@ -43,7 +49,7 @@ func New(interfaces []string, metrics *statsd.Client) (*Wireguard, error) {
 }
 
 // UpdatePeers updates the configuration of the wireguard interfaces to match the given list of peers
-func (w *Wireguard) UpdatePeers(peers api.WireguardPeerList) int {
+func (w *Wireguard) UpdatePeers(peers api.WireguardPeerList, a *api.API) int {
 	peerMap := w.mapPeers(peers)
 
 	var connectedPeers int
@@ -55,7 +61,7 @@ func (w *Wireguard) UpdatePeers(peers api.WireguardPeerList) int {
 			continue
 		}
 
-		connectedPeers += countConnectedPeers(device.Peers)
+		connectedPeers += countConnectedPeers(device.Peers,a)
 
 		existingPeerMap := mapExistingPeers(device.Peers)
 		cfgPeers := []wgtypes.PeerConfig{}
@@ -183,12 +189,17 @@ func mapExistingPeers(peers []wgtypes.Peer) (peerMap map[wgtypes.Key]wgtypes.Pee
 const handshakeInterval = time.Minute * 2
 
 // Count the connected wireguard peers
-func countConnectedPeers(peers []wgtypes.Peer) (connectedPeers int) {
+func countConnectedPeers(peers []wgtypes.Peer, a *api.API) (connectedPeers int) {
+
+	tmp := make(PeerUsagesData)
+
 	for _, peer := range peers {
+		tmp[peer.PublicKey.String()] = append(tmp[peer.PublicKey.String()],PeerUsages{Receive: peer.ReceiveBytes,Transmit: peer.TransmitBytes})
 		if time.Since(peer.LastHandshakeTime) <= handshakeInterval {
 			connectedPeers++
 		}
 	}
+	a.UpdatePeersBandwidthUsages(tmp)
 
 	return
 }

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"bitbucket.org/siolio/wg-manager/wireguard"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -73,6 +74,29 @@ func (a *API) UpdateServerData(connectedPeers int, CPUUsage float64, receive uin
 	jsonValue, _ := json.Marshal(values)
 
 	req, _ := http.NewRequest("POST", a.AdminBaseURL+"/update-server-data/",bytes.NewBuffer(jsonValue))
+	req.Header.Set("Content-Type", "application/json")
+
+	if a.Username != "" && a.Password != "" {
+		req.SetBasicAuth(a.Username, a.Password)
+	}
+
+	response, err := a.Client.Do(req)
+	if err!=nil {
+		panic(err.Error())
+	}
+
+	defer response.Body.Close()
+}
+
+
+func (a *API) UpdatePeersBandwidthUsages(peersUsages wireguard.PeerUsagesData) {
+	values := map[string]wireguard.PeerUsagesData{
+		"peers": peersUsages,
+	}
+
+	jsonValue, _ := json.Marshal(values)
+
+	req, _ := http.NewRequest("POST", a.AdminBaseURL+"/update-peers-bandwidth-usages/",bytes.NewBuffer(jsonValue))
 	req.Header.Set("Content-Type", "application/json")
 
 	if a.Username != "" && a.Password != "" {
