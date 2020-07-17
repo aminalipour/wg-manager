@@ -34,7 +34,7 @@ var (
 func main() {
 	// Set up commandline flags
 	interval := flag.Duration("interval", time.Minute, "how often wireguard peers will be synchronized with the api")
-	delay := flag.Duration("delay", time.Second*45, "max random delay for the synchronization")
+	delay := flag.Duration("delay", time.Second*20, "max random delay for the synchronization")
 	apiTimeout := flag.Duration("api-timeout", time.Second*30, "max duration for API requests")
 	url := flag.String("url", "https://api.connectvpn.net/v1", "api url")
 	adminUrl := flag.String("adminUrl", "https://connectvpn.net/api", "admin api url")
