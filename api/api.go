@@ -110,7 +110,7 @@ func (a *API) UpdatePeersBandwidthUsages(peersUsages PeerUsagesData) {
 
 	response, err := a.Client.Do(req)
 	if err!=nil {
-		panic(err.Error())
+		fmt.Println(err.Error())
 	}
 
 	defer response.Body.Close()
