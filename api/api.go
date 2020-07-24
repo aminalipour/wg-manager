@@ -87,7 +87,7 @@ func (a *API) UpdateServerData(connectedPeers int, CPUUsage float64, receive uin
 
 	response, err := a.Client.Do(req)
 	if err!=nil {
-		panic(err.Error())
+		fmt.Println(err.Error())
 	}
 
 	defer response.Body.Close()
