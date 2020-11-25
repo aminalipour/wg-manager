@@ -8,8 +8,8 @@ import (
 	"github.com/coreos/go-iptables/iptables"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"bitbucket.org/siolio/wg-manager/api"
-	"bitbucket.org/siolio/wg-manager/portforward"
+	"github.com/aminalipour/wg-manager/api"
+	"github.com/aminalipour/wg-manager/portforward"
 )
 
 // Integration tests for portforwarding, not ran in short mode

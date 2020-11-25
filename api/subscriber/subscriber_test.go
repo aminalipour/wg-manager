@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/infosum/statsd"
-	"bitbucket.org/siolio/wg-manager/api"
-	"bitbucket.org/siolio/wg-manager/api/subscriber"
+	"github.com/aminalipour/wg-manager/api"
+	"github.com/aminalipour/wg-manager/api/subscriber"
 	"nhooyr.io/websocket"
 	"nhooyr.io/websocket/wsjson"
 )

@@ -4,7 +4,7 @@ import (
 	"net"
 	"testing"
 
-	"bitbucket.org/siolio/wg-manager/iputil"
+	"github.com/aminalipour/wg-manager/iputil"
 )
 
 var ipNet = []net.IPNet{

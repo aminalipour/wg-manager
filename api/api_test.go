@@ -9,7 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"bitbucket.org/siolio/wg-manager/api"
+	"github.com/aminalipour/wg-manager/api"
 )
 
 var fixture = api.WireguardPeerList{

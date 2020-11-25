@@ -8,8 +8,8 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/infosum/statsd"
-	"bitbucket.org/siolio/wg-manager/api"
-	"bitbucket.org/siolio/wg-manager/wireguard"
+	"github.com/aminalipour/wg-manager/api"
+	"github.com/aminalipour/wg-manager/wireguard"
 	"golang.zx2c4.com/wireguard/wgctrl"
 	"golang.zx2c4.com/wireguard/wgctrl/wgtypes"
 )

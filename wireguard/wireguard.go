@@ -6,10 +6,10 @@ import (
 	"net"
 	"time"
 
-	"bitbucket.org/siolio/wg-manager/api"
+	"github.com/aminalipour/wg-manager/api"
 	"github.com/infosum/statsd"
 
-	"bitbucket.org/siolio/wg-manager/iputil"
+	"github.com/aminalipour/wg-manager/iputil"
 	"golang.zx2c4.com/wireguard/wgctrl"
 	"golang.zx2c4.com/wireguard/wgctrl/wgtypes"
 )

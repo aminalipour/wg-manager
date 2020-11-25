@@ -1,4 +1,4 @@
-module bitbucket.org/siolio/wg-manager
+module github.com/aminalipour/wg-manager
 
 go 1.13
 

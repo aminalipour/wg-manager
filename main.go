@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bitbucket.org/siolio/wg-manager/util"
+	"github.com/aminalipour/wg-manager/util"
 	"context"
 	"errors"
 	"flag"
@@ -17,10 +17,10 @@ import (
 	"github.com/DMarby/jitter"
 	"github.com/infosum/statsd"
 	"github.com/jamiealquiza/envy"
-	"bitbucket.org/siolio/wg-manager/api"
-	"bitbucket.org/siolio/wg-manager/api/subscriber"
-	"bitbucket.org/siolio/wg-manager/portforward"
-	"bitbucket.org/siolio/wg-manager/wireguard"
+	"github.com/aminalipour/wg-manager/api"
+	"github.com/aminalipour/wg-manager/api/subscriber"
+	"github.com/aminalipour/wg-manager/portforward"
+	"github.com/aminalipour/wg-manager/wireguard"
 )
 
 var (

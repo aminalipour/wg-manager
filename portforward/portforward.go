@@ -11,7 +11,7 @@ import (
 	"github.com/coreos/go-iptables/iptables"
 	"github.com/digineo/go-ipset/v2"
 	"github.com/mdlayher/netlink"
-	"bitbucket.org/siolio/wg-manager/api"
+	"github.com/aminalipour/wg-manager/api"
 	"github.com/ti-mo/netfilter"
 )
 
