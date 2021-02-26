@@ -101,7 +101,10 @@ func (a *API) UpdatePeersBandwidthUsages(peersUsages PeerUsagesData) {
 
 	jsonValue, _ := json.Marshal(values)
 
-	req, _ := http.NewRequest("POST", a.AdminBaseURL+"/update-peers-bandwidth-usages/",bytes.NewBuffer(jsonValue))
+	req, err := http.NewRequest("POST", a.AdminBaseURL+"/update-peers-bandwidth-usages/",bytes.NewBuffer(jsonValue))
+	if err!=nil {
+		fmt.Println(err.Error())
+	}
 	req.Header.Set("Content-Type", "application/json")
 
 	if a.Username != "" && a.Password != "" {
